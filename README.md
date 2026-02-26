@@ -5,6 +5,31 @@
 ChimerraPass is a personal password store inspired by pass,
 built to explore secure systems design in Rust.
 
+## How To Use?
+# Create a new storage
+./chimerra-passwordstore init ~/myvault.rvlt
+
+# Add an entry (e.g., email password)
+./chimerra-passwordstore insert ~/myvault.rvlt email
+
+# View an entry
+./chimerra-passwordstore show ~/myvault.rvlt email
+
+# List all entries
+./chimerra-passwordstore list ~/myvault.rvlt
+
+# Delete an entry
+./chimerra-passwordstore delete ~/myvault.rvlt email
+
+# Generate a 24-word mnemonic phrase
+./chimerra-passwordstore mnemonic -w 24
+
+# Encrypt file using PGP
+./chimerra-passwordstore gpg-encrypt secret.txt secret.gpg public-key.asc
+
+# Decrypt PGP file
+./chimerra-passwordstore gpg-decrypt secret.gpg decrypted.txt private-key.asc
+
 ## Goals
 - Learn memory hardening techniques (mlock, prctl)
 - Practice safe handling of secrets in Rust
@@ -38,14 +63,8 @@ Things I wanted to explore:
 - designing a simple binary file format
 - building a small but non-trivial CLI tool
 
-## What this project is NOT
 
-- ❌ Not a production-ready password manager
-- ❌ Not meant to compete with `pass`, Bitwarden, KeePass, etc.
-- ❌ No formal threat model or guarantees
-
-
-## High-level design
+## design
 
 - Single encrypted binary container (instead of many files)
 - Master password → Argon2id → encryption key
